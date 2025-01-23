@@ -44,6 +44,6 @@ describe("Migration Script", () => {
 
     const initialCount = await Waste.countDocuments();
     await initializeMockData();
-    expect(await Waste.countDocuments()).toEqual(initialCount); // No new mock data added
+    expect(await Waste.countDocuments()).toEqual(initialCount);
   });
 });

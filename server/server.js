@@ -11,7 +11,6 @@ mongoose
   .then(async () => {
     console.log("Connected to MongoDB");
 
-    // Initialize mock data
     await initializeMockData();
 
     app.listen(PORT, () => {

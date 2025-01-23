@@ -1,7 +1,6 @@
 const Waste = require("../models/Waste");
 
 module.exports = {
-  // Create Waste Data
   async createWasteData(req, res) {
     try {
       const { collectionFrequency, recyclingRate, wasteType } = req.body;
@@ -18,7 +17,6 @@ module.exports = {
     }
   },
 
-  // Fetch all Waste Data
   async getWasteData(req, res) {
     try {
       const data = await Waste.find();
@@ -28,7 +26,6 @@ module.exports = {
     }
   },
 
-  // Update Waste Data
   async updateWasteData(req, res) {
     try {
       const { id } = req.params;
@@ -52,7 +49,6 @@ module.exports = {
     }
   },
 
-  // Delete Waste Data
   async deleteWasteData(req, res) {
     try {
       const { id } = req.params;

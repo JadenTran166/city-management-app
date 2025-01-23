@@ -1,5 +1,5 @@
 const request = require("supertest");
-const app = require("../../index"); // Entry point of the server
+const app = require("../../index");
 const Water = require("../../models/Water");
 
 jest.mock("../../models/Water");
@@ -51,7 +51,7 @@ describe("Water Routes", () => {
     it("should handle validation errors", async () => {
       const response = await request(app).post("/api/water").send({});
 
-      expect(response.status).toBe(500); // Assuming server sends a 500 error
+      expect(response.status).toBe(500);
     });
   });
 });

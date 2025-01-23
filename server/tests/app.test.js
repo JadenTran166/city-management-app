@@ -53,7 +53,7 @@ describe("API Endpoints", () => {
     });
 
     it("should return 400 if required fields are missing", async () => {
-      const data = { peakHours: "18:00-22:00" }; // Missing dailyUsage
+      const data = { peakHours: "18:00-22:00" };
       const res = await request(app).post("/api/electricity").send(data);
       expect(res.statusCode).toEqual(400);
       expect(res.body).toHaveProperty("error");
@@ -77,7 +77,7 @@ describe("API Endpoints", () => {
         collectionFrequency: "Weekly",
         recyclingRate: -5,
         wasteType: "Plastic",
-      }; // Invalid recycling rate
+      };
       const res = await request(app).post("/api/waste").send(data);
       expect(res.statusCode).toEqual(400);
       expect(res.body).toHaveProperty("error");

@@ -3,9 +3,9 @@ const csvParser = require("csv-parser");
 const fs = require("fs");
 
 module.exports = {
-  // Upload Electricity Data (via CSV file)
   async uploadElectricityData(req, res) {
     try {
+      console.log(req);
       if (!req.file) {
         return res.status(400).json({ error: "No file uploaded" });
       }
@@ -35,7 +35,6 @@ module.exports = {
     }
   },
 
-  // Fetch all Electricity Data
   async getElectricityData(req, res) {
     try {
       const data = await Electricity.find();
@@ -45,7 +44,6 @@ module.exports = {
     }
   },
 
-  // Create Single Electricity Record
   async createElectricityData(req, res) {
     try {
       const { dailyUsage, peakHours, outageLogs } = req.body;
@@ -62,7 +60,6 @@ module.exports = {
     }
   },
 
-  // Delete Electricity Data
   async deleteElectricityData(req, res) {
     try {
       const { id } = req.params;

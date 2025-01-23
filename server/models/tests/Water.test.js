@@ -10,7 +10,7 @@ describe("Water Model", () => {
     });
 
     const validationError = validWater.validateSync();
-    expect(validationError).toBeUndefined(); // No errors
+    expect(validationError).toBeUndefined();
   });
 
   it("should throw validation error for missing fields", async () => {

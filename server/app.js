@@ -4,6 +4,7 @@ const dotenv = require("dotenv");
 const routes = require("./routes");
 const authMiddleware = require("./middleware/authMiddleware");
 const initializeMockData = require("./migrations");
+const cors = require("cors");
 
 const waterRoutes = require("./routes/waterRoutes");
 const electricityRoutes = require("./routes/electricityRoutes");
@@ -14,6 +15,7 @@ dotenv.config();
 const app = express();
 
 // Middleware
+app.use(cors());
 app.use(express.json());
 app.use(authMiddleware);
 

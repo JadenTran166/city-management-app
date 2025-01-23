@@ -1,28 +1,30 @@
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-import { VitePWA } from 'vite-plugin-pwa';
-import { visualizer } from 'rollup-plugin-visualizer';
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import { VitePWA } from "vite-plugin-pwa";
+import { visualizer } from "rollup-plugin-visualizer";
+import tailwindcss from "@tailwindcss/vite";
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     react(),
+    tailwindcss(),
     VitePWA({
-      registerType: 'autoUpdate',
+      registerType: "autoUpdate",
       workbox: {
         runtimeCaching: [
           {
             urlPattern: /.*\.css/,
-            handler: 'CacheFirst',
+            handler: "CacheFirst",
             options: {
-              cacheName: 'css-cache',
+              cacheName: "css-cache",
             },
           },
           {
             urlPattern: /.*\.js/,
-            handler: 'StaleWhileRevalidate',
+            handler: "StaleWhileRevalidate",
             options: {
-              cacheName: 'js-cache',
+              cacheName: "js-cache",
             },
           },
         ],
@@ -30,25 +32,22 @@ export default defineConfig({
     }),
   ],
   optimizeDeps: {
-    include: ['react', 'react-dom'], 
+    include: ["react", "react-dom"],
   },
   server: {
-    port: 3000, 
+    port: 3000,
     open: true,
     proxy: {
-      '/api': 'http://localhost:5000', // Định tuyến các yêu cầu API đến backend
+      "/api": "http://localhost:5000",
     },
   },
   resolve: {
     alias: {
-      '@': '/src', // Alias để dễ dàng import các tệp từ thư mục `src`
+      "@": "/src",
     },
   },
-  define: {
-    'process.env': process.env,
-  },
   build: {
-    outDir: 'dist',
+    outDir: "dist",
     sourcemap: true,
     rollupOptions: {
       plugins: [visualizer()],

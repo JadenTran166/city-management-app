@@ -1,7 +1,6 @@
 const Water = require("../models/Water");
 
 module.exports = {
-  // Create Water Data
   async createWaterData(req, res) {
     try {
       const { dailyConsumption, availability, sourceType } = req.body;
@@ -18,7 +17,6 @@ module.exports = {
     }
   },
 
-  // Fetch all Water Data
   async getWaterData(req, res) {
     try {
       const data = await Water.find();
@@ -28,7 +26,6 @@ module.exports = {
     }
   },
 
-  // Fetch Single Water Record
   async getWaterById(req, res) {
     try {
       const { id } = req.params;
@@ -44,7 +41,6 @@ module.exports = {
     }
   },
 
-  // Update Water Data
   async updateWaterData(req, res) {
     try {
       const { id } = req.params;
@@ -68,7 +64,6 @@ module.exports = {
     }
   },
 
-  // Delete Water Data
   async deleteWaterData(req, res) {
     try {
       const { id } = req.params;

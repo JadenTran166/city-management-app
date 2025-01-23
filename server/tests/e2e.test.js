@@ -1,4 +1,3 @@
-// server/tests/e2e.test.js
 const { remote } = require("webdriverio");
 const assert = require("assert");
 

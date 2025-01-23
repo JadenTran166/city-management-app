@@ -1,16 +1,42 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon server.js",
+    "dev": "nodemon server.js",
+    "test": "jest --coverage",
+    "e2e": "wdio wdio.conf.js",
+    "migration": "migrate-mongo up",
+    "prepare": "npm run migration"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@faker-js/faker": "^9.4.0",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "csv-parser": "^3.1.0",
+    "dotenv": "^16.4.7",
     "express": "^4.21.2",
-    "mongodb": "^6.12.0"
+    "mongoose": "^8.9.5",
+    "mongoose-findorcreate": "^4.0.0",
+    "multer": "^1.4.5-lts.1",
+    "nodemon": "^3.1.9"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.23.0",
+    "@babel/preset-env": "^7.23.0",
+    "@wdio/cli": "^8.8.0",
+    "@wdio/cucumber-framework": "^9.5.0",
+    "@wdio/local-runner": "^9.6.1",
+    "@wdio/mocha-framework": "^8.8.0",
+    "@wdio/spec-reporter": "^9.5.0",
+    "chromedriver": "^115.0.0",
+    "jest": "^29.5.0",
+    "migrate-mongo": "^7.2.1",
+    "supertest": "^6.3.3"
   }
 }

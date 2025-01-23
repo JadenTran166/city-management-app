@@ -1,26 +1,23 @@
-const path = require('path');
-const port = 5000;
-const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
-const dotenv = require('dotenv');
+const app = require("./app");
+const mongoose = require("mongoose");
+const initializeMockData = require("./migrations");
 
-const authRoutes = require('./routes/authRoutes');
-const dataRoutes = require('./routes/dataRoutes');
+const PORT = process.env.PORT || 5000;
+const MONGO_URI =
+  process.env.MONGO_URI || "mongodb://localhost:27017/city_management_db";
 
-dotenv.config();
-const app = express();
+mongoose
+  .connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(async () => {
+    console.log("Connected to MongoDB");
 
-app.use(express.static(path.join(__dirname, '../dist')));
+    // Initialize mock data
+    await initializeMockData();
 
-app.get('/api', (req, res) => {
-  res.json({ message: 'Hello from backend!' });
-});
-
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../dist/index.html'));
-});
-
-app.listen(port, () => {
-  console.log(`Server is running at http://localhost:${port}`);
-});
+    app.listen(PORT, () => {
+      console.log(`Server running on http://localhost:${PORT}`);
+    });
+  })
+  .catch((err) => {
+    console.error("Failed to connect to MongoDB", err);
+  });

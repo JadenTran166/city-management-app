@@ -1,25 +1,37 @@
-const { MongoClient } = require('mongodb');
+const express = require("express");
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+const routes = require("./routes");
+const authMiddleware = require("./middleware/authMiddleware");
+const initializeMockData = require("./migrations");
 
-const uri = "mongodb://localhost:27017";
+const waterRoutes = require("./routes/waterRoutes");
+const electricityRoutes = require("./routes/electricityRoutes");
+const wasteRoutes = require("./routes/wasteRoutes");
 
-const dbName = "myDatabase";
+dotenv.config();
 
-async function connectToMongoDB() {
-    const client = new MongoClient(uri);
+const app = express();
 
-    try {
-        await client.connect();
-        console.log("Success connect MongoDB!");
+// Middleware
+app.use(express.json());
+app.use(authMiddleware);
 
-        const db = client.db(dbName);
+// Routes
+app.use("/api", routes);
 
-        const collections = await db.listCollections().toArray();
-        console.log("collection:", collections);
-    } catch (error) {
-        console.error("Connection Error MongoDB:", error);
-    } finally {
-        await client.close();
-    }
-}
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ error: "Internal Server Error" });
+});
 
-connectToMongoDB();
+app.use("/api/water", waterRoutes);
+app.use("/api/electricity", electricityRoutes);
+app.use("/api/waste", wasteRoutes);
+
+app.get("/", (req, res) => {
+  res.send("City Management App Backend is Running");
+});
+
+module.exports = app;
